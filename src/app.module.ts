@@ -7,8 +7,6 @@ import { CartModule } from './modules/cart/cart.module';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [appConfig],
-    }),
     CartModule,
   ],
 })

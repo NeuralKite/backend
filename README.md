@@ -45,12 +45,6 @@ src
 
 The example `CartModule` demonstrates pragmatic architectural boundaries:
 
-- `CartController` exposes REST endpoints to manage cart items, discounts, and summaries.
-- `CartService` encapsulates the domain logic, including subtotal and discount calculations.
-- DTOs enforce input validation and provide OpenAPI metadata.
-- Entities wrap domain objects to centralize invariants.
-
-Use this implementation as a starting point and replace the in-memory store with a database or external services as required by the challenge.
 
 ## Extending the template
 
