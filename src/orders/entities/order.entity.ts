@@ -2,84 +2,35 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  Index,
   JoinColumn,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
 } from 'typeorm';
 
-import { Customer } from '../../customers/entities/customer.entity';
 import { OrderStatus } from '../enums/order-status.enum';
-import { OrderItem } from './order-item.entity';
-import { OrderStatusHistory } from './order-status-history.entity';
+import { Order } from './order.entity';
 
-@Entity({ name: 'orders' })
-@Index(['customer'])
-@Index(['status'])
-export class Order {
+@Entity({ name: 'order_status_history' })
+export class OrderStatusHistory {
   @PrimaryGeneratedColumn({ type: 'bigint', unsigned: true })
   id: string;
 
-  @ManyToOne(() => Customer, (customer) => customer.orders, {
-    nullable: true,
-    onDelete: 'SET NULL',
+  @ManyToOne(() => Order, (order) => order.statusHistory, {
+    nullable: false,
+    onDelete: 'CASCADE',
   })
-  @JoinColumn({ name: 'customer_id' })
-  customer?: Customer | null;
+  @JoinColumn({ name: 'order_id' })
+  order: Order;
 
-  @Column({ type: 'enum', enum: OrderStatus, default: OrderStatus.Draft })
-  status: OrderStatus;
+  @Column({ name: 'old_status', type: 'enum', enum: OrderStatus, nullable: true })
+  oldStatus?: OrderStatus | null;
 
-  @Column({ length: 3, default: 'USD' })
-  currency: string;
+  @Column({ name: 'new_status', type: 'enum', enum: OrderStatus })
+  newStatus: OrderStatus;
 
-  @Column({
-    name: 'subtotal_amount',
-    type: 'decimal',
-    precision: 12,
-    scale: 2,
-    default: '0.00',
-  })
-  subtotalAmount: string;
+  @CreateDateColumn({ name: 'changed_at' })
+  changedAt: Date;
 
-  @Column({
-    name: 'tax_amount',
-    type: 'decimal',
-    precision: 12,
-    scale: 2,
-    default: '0.00',
-  })
-  taxAmount: string;
-
-  @Column({
-    name: 'total_amount',
-    type: 'decimal',
-    precision: 12,
-    scale: 2,
-    default: '0.00',
-  })
-  totalAmount: string;
-
-  @Column({ type: 'text', nullable: true })
-  notes?: string | null;
-
-  @CreateDateColumn({ name: 'created_at' })
-  createdAt: Date;
-
-  @UpdateDateColumn({ name: 'updated_at' })
-  updatedAt: Date;
-
-  @Column({ name: 'confirmed_at', type: 'datetime', nullable: true })
-  confirmedAt?: Date | null;
-
-  @Column({ name: 'cancelled_at', type: 'datetime', nullable: true })
-  cancelledAt?: Date | null;
-
-  @OneToMany(() => OrderItem, (orderItem) => orderItem.order)
-  items?: OrderItem[];
-
-  @OneToMany(() => OrderStatusHistory, (history) => history.order)
-  statusHistory?: OrderStatusHistory[];
+  @Column({ name: 'changed_by', length: 120, nullable: true })
+  changedBy?: string | null;
 }

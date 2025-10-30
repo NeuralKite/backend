@@ -38,40 +38,16 @@ export class OrderItem {
   @Column({ name: 'unit_price', type: 'decimal', precision: 10, scale: 2 })
   unitPrice: string;
 
-  @Column({
-    name: 'tax_percentage',
-    type: 'decimal',
-    precision: 5,
-    scale: 2,
-    default: '0.00',
-  })
+  @Column({ name: 'tax_percentage', type: 'decimal', precision: 5, scale: 2, default: '0.00' })
   taxPercentage: string;
 
-  @Column({
-    name: 'tax_amount',
-    type: 'decimal',
-    precision: 12,
-    scale: 2,
-    default: '0.00',
-  })
+  @Column({ name: 'tax_amount', type: 'decimal', precision: 12, scale: 2, default: '0.00' })
   taxAmount: string;
 
-  @Column({
-    name: 'subtotal_amount',
-    type: 'decimal',
-    precision: 12,
-    scale: 2,
-    default: '0.00',
-  })
+  @Column({ name: 'subtotal_amount', type: 'decimal', precision: 12, scale: 2, default: '0.00' })
   subtotalAmount: string;
 
-  @Column({
-    name: 'total_amount',
-    type: 'decimal',
-    precision: 12,
-    scale: 2,
-    default: '0.00',
-  })
+  @Column({ name: 'total_amount', type: 'decimal', precision: 12, scale: 2, default: '0.00' })
   totalAmount: string;
 
   @CreateDateColumn({ name: 'created_at' })

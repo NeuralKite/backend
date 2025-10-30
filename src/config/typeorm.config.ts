@@ -1,9 +1,6 @@
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { Logger } from '@nestjs/common';
-import {
-  TypeOrmModuleAsyncOptions,
-  TypeOrmModuleOptions,
-} from '@nestjs/typeorm';
+import { TypeOrmModuleAsyncOptions, TypeOrmModuleOptions } from '@nestjs/typeorm';
 
 import { DatabaseConfig } from './database.config';
 
@@ -24,6 +21,8 @@ export const typeOrmConfig: TypeOrmModuleAsyncOptions = {
 
     const connectionOptions: TypeOrmModuleOptions = {
       type: database?.type ?? 'mysql',
+      host: database?.host ?? 'localhost',
+      port: database?.port ?? 3306,
       username: database?.username ?? 'root',
       password: database?.password ?? 'root',
       database: database?.database ?? 'shopping_cart',
