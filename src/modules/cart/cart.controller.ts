@@ -1,4 +1,14 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Post,
+  VERSION_NEUTRAL,
+} from '@nestjs/common';
 import { ApiCreatedResponse, ApiNoContentResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CartService } from './cart.service';
 import { ApplyDiscountDto } from './dto/apply-discount.dto';
@@ -7,7 +17,7 @@ import { CartSummaryResponseDto } from './dto/cart-summary-response.dto';
 import { CreateCartItemDto } from './dto/create-cart-item.dto';
 
 @ApiTags('cart')
-@Controller({ path: 'cart', version: '1' })
+@Controller({ path: 'cart', version: ['1', VERSION_NEUTRAL] })
 export class CartController {
   constructor(private readonly cartService: CartService) {}
 
@@ -16,6 +26,8 @@ export class CartController {
     description: 'Item successfully added to the cart.',
     type: CartItemResponseDto,
   })
+  createItem(@Body() payload: CreateCartItemDto): CartItemResponseDto {
+    const item = this.cartService.addItem(payload);
     return item.toJSON();
   }
 
@@ -25,12 +37,15 @@ export class CartController {
     type: CartItemResponseDto,
     isArray: true,
   })
-ems().map((item) => item.toJSON());
+  findAllItems(): CartItemResponseDto[] {
+    return this.cartService.getItems().map((item) => item.toJSON());
   }
 
   @Delete('items/:id')
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiNoContentResponse({ description: 'Item removed from the cart.' })
+  removeItem(@Param('id') id: string): void {
+    this.cartService.removeItem(id);
   }
 
   @Post('discount')
@@ -38,6 +53,7 @@ ems().map((item) => item.toJSON());
     description: 'Summary of the cart after applying the discount.',
     type: CartSummaryResponseDto,
   })
+  applyDiscount(@Body() payload: ApplyDiscountDto): CartSummaryResponseDto {
     return this.cartService.applyDiscount(payload);
   }
 
@@ -46,6 +62,7 @@ ems().map((item) => item.toJSON());
     description: 'Summary of the cart totals.',
     type: CartSummaryResponseDto,
   })
+  getSummary(): CartSummaryResponseDto {
     return this.cartService.summary();
   }
 }

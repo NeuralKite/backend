@@ -1,4 +1,11 @@
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { CartItemOrmEntity } from './cart-item.orm-entity';
 
 @Entity({ name: 'carts' })
@@ -25,6 +32,6 @@ export class CartOrmEntity {
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt!: Date;
 
-  @OneToMany(() => CartItemOrmEntity, (item) => item.cart, { cascade: ['insert', 'update'] })
+  @OneToMany(() => CartItemOrmEntity, (item: CartItemOrmEntity) => item.cart, { cascade: ['insert', 'update'] })
   items!: CartItemOrmEntity[];
 }
