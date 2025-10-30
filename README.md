@@ -1,55 +1,73 @@
-# Fullstack Technical Test – Backend Template
+<p align="center">
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
+</p>
 
-This repository provides a NestJS template aligned with professional backend practices for the Fullstack Developer technical test. It implements a simple shopping cart domain and leaves clear extension points so you can focus on the product-specific requirements.
+[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
+[circleci-url]: https://circleci.com/gh/nestjs/nest
 
-## Tech stack
+  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+    <p align="center">
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
+<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
+<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
+<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
+<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
+<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
+  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
+    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
+  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
+</p>
+  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
+  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-- [NestJS 10](https://nestjs.com/) with TypeScript
-- REST API with automatic OpenAPI (Swagger) documentation
-- Class-validator and class-transformer for DTO validation
-- Jest for unit and e2e testing
-- ESLint + Prettier configuration for consistent code style
+## Description
 
-## Getting started
+[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+
+## Installation
 
 ```bash
-npm install
-npm run start:dev
+$ pnpm install
 ```
 
-The API is served on `http://localhost:3000/api` by default and the automatically generated documentation lives at `http://localhost:3000/docs`.
+## Running the app
 
-## Available scripts
+```bash
+# development
+$ pnpm run start
 
-| Command | Description |
-| ------- | ----------- |
-| `npm run start:dev` | Starts the API with file watching and hot reload. |
-| `npm run build` | Compiles the TypeScript sources to `dist/`. |
-| `npm run lint` | Runs ESLint using the included configuration. |
-| `npm run test` | Executes the unit test suite. |
-| `npm run test:e2e` | Executes the end-to-end tests. |
+# watch mode
+$ pnpm run start:dev
 
-## Project structure
-
-```
-src
-├── common/            # Space for cross-cutting concerns (filters, interceptors, pipes)
-├── config/            # Application configuration files
-├── main.ts            # Application bootstrap
-├── app.module.ts      # Root module
-└── modules/
-    └── cart/          # Example cart module with controller, service, DTOs, and entities
+# production mode
+$ pnpm run start:prod
 ```
 
-## Cart domain overview
+## Test
 
-The example `CartModule` demonstrates pragmatic architectural boundaries:
+```bash
+# unit tests
+$ pnpm run test
 
+# e2e tests
+$ pnpm run test:e2e
 
-## Extending the template
+# test coverage
+$ pnpm run test:cov
+```
 
-- Add persistence by introducing a repository (e.g., Prisma, TypeORM) in the service layer.
-- Secure the API using Nest guards and interceptors.
-- Configure deployment scripts or Dockerfiles following your hosting provider.
+## Support
 
-Feel free to adapt the structure to match your team's conventions while keeping these quality gates (tests, linting, formatting) in place.
+Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+
+## Stay in touch
+
+- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
+- Website - [https://nestjs.com](https://nestjs.com/)
+- Twitter - [@nestframework](https://twitter.com/nestframework)
+
+## License
+
+Nest is [MIT licensed](LICENSE).
