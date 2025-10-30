@@ -1,4 +1,4 @@
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
 
 type DatabaseConfig = {
@@ -13,7 +13,7 @@ type DatabaseConfig = {
 };
 
 export const typeOrmConfig: TypeOrmModuleAsyncOptions = {
-  imports: [ConfigModule],
+  imports: [],
   useFactory: async (configService: ConfigService) => {
     const database = configService.get<DatabaseConfig>('database');
 
@@ -22,10 +22,10 @@ export const typeOrmConfig: TypeOrmModuleAsyncOptions = {
       host: database?.host ?? 'localhost',
       port: database?.port ?? 3306,
       username: database?.username ?? 'root',
-      password: database?.password ?? 'root',
-      database: database?.database ?? 'shopping_cart',
-      synchronize: database?.synchronize ?? false,
-      logging: database?.logging ?? false,
+      password: database?.password ?? 'Ricar555@',
+      database: database?.database ?? 'shopping_cart_db',
+      synchronize: database?.synchronize ?? true,
+      logging: database?.logging ?? true,
       autoLoadEntities: true,
     };
   },
