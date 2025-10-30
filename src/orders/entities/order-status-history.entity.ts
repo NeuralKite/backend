@@ -22,7 +22,12 @@ export class OrderStatusHistory {
   @JoinColumn({ name: 'order_id' })
   order: Order;
 
-  @Column({ name: 'old_status', type: 'enum', enum: OrderStatus, nullable: true })
+  @Column({
+    name: 'old_status',
+    type: 'enum',
+    enum: OrderStatus,
+    nullable: true,
+  })
   oldStatus?: OrderStatus | null;
 
   @Column({ name: 'new_status', type: 'enum', enum: OrderStatus })

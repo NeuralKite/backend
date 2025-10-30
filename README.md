@@ -26,13 +26,31 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Installation
+## Local setup
+
+### Installation
 
 ```bash
 $ pnpm install
 ```
 
-## Running the app
+### Database configuration
+
+1. Create a copy of the provided environment template:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Update the `DB_` variables to match your MySQL or MariaDB instance. If the
+   database is running on your host machine and the API is running inside a
+   container, remember to replace `127.0.0.1` with the reachable host (for
+   example `host.docker.internal`).
+
+3. Optionally adjust `DB_RETRY_ATTEMPTS` and `DB_RETRY_DELAY` if your database
+   takes a few seconds to become available.
+
+### Running the app
 
 ```bash
 # development
