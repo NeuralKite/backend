@@ -16,8 +16,6 @@ export class CartController {
     description: 'Item successfully added to the cart.',
     type: CartItemResponseDto,
   })
-  async create(@Body() payload: CreateCartItemDto): Promise<CartItemResponseDto> {
-    const item = await this.cartService.addItem(payload);
     return item.toJSON();
   }
 
@@ -27,16 +25,12 @@ export class CartController {
     type: CartItemResponseDto,
     isArray: true,
   })
-  async findAll(): Promise<CartItemResponseDto[]> {
-    const items = await this.cartService.listItems();
-    return items.map((item) => item.toJSON());
+ems().map((item) => item.toJSON());
   }
 
   @Delete('items/:id')
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiNoContentResponse({ description: 'Item removed from the cart.' })
-  async remove(@Param('id') id: string): Promise<void> {
-    await this.cartService.removeItem(id);
   }
 
   @Post('discount')
@@ -44,7 +38,6 @@ export class CartController {
     description: 'Summary of the cart after applying the discount.',
     type: CartSummaryResponseDto,
   })
-  applyDiscount(@Body() payload: ApplyDiscountDto): Promise<CartSummaryResponseDto> {
     return this.cartService.applyDiscount(payload);
   }
 
@@ -53,7 +46,6 @@ export class CartController {
     description: 'Summary of the cart totals.',
     type: CartSummaryResponseDto,
   })
-  summary(): Promise<CartSummaryResponseDto> {
     return this.cartService.summary();
   }
 }

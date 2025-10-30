@@ -8,7 +8,6 @@ describe('CartController (e2e)', () => {
   let app: INestApplication;
 
   beforeAll(async () => {
-    process.env.DATABASE_TYPE = 'sqljs';
     const moduleFixture = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
