@@ -1,4 +1,14 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Post,
+  VERSION_NEUTRAL,
+} from '@nestjs/common';
 import { ApiCreatedResponse, ApiNoContentResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CartService } from './cart.service';
 import { ApplyDiscountDto } from './dto/apply-discount.dto';
@@ -7,7 +17,7 @@ import { CartSummaryResponseDto } from './dto/cart-summary-response.dto';
 import { CreateCartItemDto } from './dto/create-cart-item.dto';
 
 @ApiTags('cart')
-@Controller({ path: 'cart', version: '1' })
+@Controller({ path: 'cart', version: ['1', VERSION_NEUTRAL] })
 export class CartController {
   constructor(private readonly cartService: CartService) {}
 
