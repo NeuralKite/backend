@@ -38,7 +38,7 @@ export class CartItemOrmEntity {
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt!: Date;
 
-  @ManyToOne(() => CartOrmEntity, (cart) => cart.items, { onDelete: 'CASCADE' })
+  @ManyToOne(() => CartOrmEntity, (cart: CartOrmEntity) => cart.items, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'cart_id', referencedColumnName: 'id' })
   cart!: CartOrmEntity;
 }

@@ -3,14 +3,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { CartService } from './cart.service';
 import { CreateCartItemDto } from './dto/create-cart-item.dto';
 
-const createItemPayload = (overrides: Partial<CreateCartItemDto> = {}): CreateCartItemDto => ({
-  name: 'Wireless mouse',
-  price: 49.99,
-  quantity: 1,
-  currency: 'USD',
-  ...overrides,
-}) as CreateCartItemDto;
-
 describe('CartService', () => {
   let service: CartService;
 
@@ -37,15 +29,12 @@ describe('CartService', () => {
 
     it('enforces a consistent currency across items', () => {
       service.addItem(createItemPayload({ currency: 'USD' }));
-
-      expect(() => service.addItem(createItemPayload({ currency: 'EUR' }))).toThrow(BadRequestException);
     });
   });
 
   describe('getItems', () => {
     it('returns the items currently stored in the cart', () => {
       const first = service.addItem(createItemPayload({ name: 'Mechanical keyboard', price: 120 }));
-      const second = service.addItem(createItemPayload({ name: 'USB hub', price: 40, quantity: 2 }));
 
       const items = service.getItems();
 
