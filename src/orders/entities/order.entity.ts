@@ -1,13 +1,18 @@
 import {
+  Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
-  PrimaryGeneratedColumn,
   OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
+
 import { Customer } from '../../customers/entities/customer.entity';
+import { OrderStatus } from '../enums/order-status.enum';
+import { OrderItem } from './order-item.entity';
 import { OrderStatusHistory } from './order-status-history.entity';
-import { OrderItem } from './order-item.entity'; // Asegúrate de importar la entidad OrderItem
 
 @Entity({ name: 'orders' })
 export class Order {
@@ -25,7 +30,47 @@ export class Order {
   statusHistory: OrderStatusHistory[];
 
   @OneToMany(() => OrderItem, (orderItem) => orderItem.order)
-  items: OrderItem[]; // Relación OneToMany con OrderItem
+  items: OrderItem[];
 
-  // Otros campos y relaciones de Order
+  @Column({ type: 'enum', enum: OrderStatus, default: OrderStatus.Draft })
+  status: OrderStatus;
+
+  @Column({
+    name: 'subtotal_amount',
+    type: 'decimal',
+    precision: 12,
+    scale: 2,
+    default: '0.00',
+  })
+  subtotalAmount: string;
+
+  @Column({
+    name: 'tax_amount',
+    type: 'decimal',
+    precision: 12,
+    scale: 2,
+    default: '0.00',
+  })
+  taxAmount: string;
+
+  @Column({
+    name: 'total_amount',
+    type: 'decimal',
+    precision: 12,
+    scale: 2,
+    default: '0.00',
+  })
+  totalAmount: string;
+
+  @Column({ name: 'confirmed_at', type: 'datetime', nullable: true })
+  confirmedAt?: Date | null;
+
+  @Column({ name: 'cancelled_at', type: 'datetime', nullable: true })
+  cancelledAt?: Date | null;
+
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: Date;
+
+  @UpdateDateColumn({ name: 'updated_at' })
+  updatedAt: Date;
 }

@@ -11,6 +11,7 @@ import {
 } from 'typeorm';
 
 import { OrderItem } from '../../orders/entities/order-item.entity';
+import { ItemType } from '../enums/item-type.enum';
 import { Category } from './category.entity';
 import { TaxRate } from './tax-rate.entity';
 
@@ -34,11 +35,17 @@ export class Item {
   @Column({ type: 'text', nullable: true })
   description?: string | null;
 
+  @Column({ name: 'image_url', length: 255, nullable: true })
+  imageUrl?: string | null;
+
   @Column({ length: 64, unique: true })
   sku: string;
 
   @Column({ type: 'decimal', precision: 10, scale: 2 })
   price: string;
+
+  @Column({ type: 'enum', enum: ItemType, default: ItemType.Product })
+  type: ItemType;
 
   @ManyToOne(() => TaxRate, (taxRate) => taxRate.items, {
     nullable: true,
